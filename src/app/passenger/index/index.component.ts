@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PassengerService } from '../passenger.service';
+import { Passenger } from '../passenger';
 
 @Component({
   selector: 'app-index',
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent implements OnInit {
+  passengers: Passenger[] = [];
 
-  constructor() { }
+  constructor(private passengerService: PassengerService) { }
 
   ngOnInit(): void {
+    this.retrievePassengers();
   }
 
+  retrievePassengers() : void {
+    this.passengerService.getPassengers().subscribe(passengers => this.passengers = passengers);
+  }
 }

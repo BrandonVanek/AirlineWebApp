@@ -1,9 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-     
 import {  Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
   
 import { Passenger } from './passenger';
   
@@ -12,107 +10,38 @@ import { Passenger } from './passenger';
 })
 export class PassengerService {
   
-  private apiURL = "https://localhost:7062/api";
+  private apiURL = "https://localhost:7062/api/Passengers";
     
-  /*------------------------------------------
-  --------------------------------------------
-  Http Header Options
-  --------------------------------------------
-  --------------------------------------------*/
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
   }
-   
-  /*------------------------------------------
-  --------------------------------------------
-  Created constructor
-  --------------------------------------------
-  --------------------------------------------*/
+
   constructor(private httpClient: HttpClient) { }
     
-  /**
-   * Write code on Method
-   *
-   * @return response()
-   */
-  getAll(): Observable<any> {
+  getPassengers(): Observable<Passenger[]> {
   
-    return this.httpClient.get(this.apiURL + '/Passengers/')
-  
-    .pipe(
-      catchError(this.errorHandler)
-    )
+    return this.httpClient.get<Passenger[]>(this.apiURL, this.httpOptions);
   }
-    
-  /**
-   * Write code on Method
-   *
-   * @return response()
-   */
-  create(passenger:Passenger): Observable<any> {
+
+  getFlight(id:number): Observable<Passenger> {
+    let url = `${this.apiURL}/${id}`
+    return this.httpClient.get<Passenger>(url, this.httpOptions);
+  }
+
+  createPassenger(passenger:Passenger): Observable<Passenger> {
   
-    return this.httpClient.post(this.apiURL + '/Passengers/', JSON.stringify(passenger), this.httpOptions)
-  
-    .pipe(
-      catchError(this.errorHandler)
-    )
+    return this.httpClient.post<Passenger>(this.apiURL, JSON.stringify(passenger), this.httpOptions)
   }  
     
-  /**
-   * Write code on Method
-   *
-   * @return response()
-   */
-  find(id:number): Observable<any> {
-  
-    return this.httpClient.get(this.apiURL + '/Passengers/' + id)
-  
-    .pipe(
-      catchError(this.errorHandler)
-    )
-  }
-    
-  /**
-   * Write code on Method
-   *
-   * @return response()
-   */
-  update(id:number, passenger:Passenger): Observable<any> {
-  
-    return this.httpClient.put(this.apiURL + '/Passengers/' + id, JSON.stringify(passenger), this.httpOptions)
- 
-    .pipe( 
-      catchError(this.errorHandler)
-    )
+  updatePassenger(id:number, passenger:Passenger): Observable<any> {
+    let url = `${this.apiURL}/${id}`
+    return this.httpClient.put(url, JSON.stringify(passenger), this.httpOptions)
   }
        
-  /**
-   * Write code on Method
-   *
-   * @return response()
-   */
-  delete(id:number){
-    return this.httpClient.delete(this.apiURL + '/Passengers/' + id, this.httpOptions)
-  
-    .pipe(
-      catchError(this.errorHandler)
-    )
+  deletePassenger(id:number){
+    let url = `${this.apiURL}/${id}`
+    return this.httpClient.delete(url, this.httpOptions)
   }
-      
-  /** 
-   * Write code on Method
-   *
-   * @return response()
-   */
-  errorHandler(error:any) {
-    let errorMessage = '';
-    if(error.error instanceof ErrorEvent) {
-      errorMessage = error.error.message;
-    } else {
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    return throwError(errorMessage);
- }
 }

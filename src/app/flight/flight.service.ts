@@ -1,9 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-     
-import {  Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import {  Observable } from 'rxjs';
   
 import { Flight } from './flight';
   
@@ -12,107 +10,37 @@ import { Flight } from './flight';
 })
 export class FlightService {
   
-  private apiURL = "https://localhost:7062/api";
+  private apiURL = "https://localhost:7062/api/Flights";
     
-  /*------------------------------------------
-  --------------------------------------------
-  Http Header Options
-  --------------------------------------------
-  --------------------------------------------*/
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
   }
-   
-  /*------------------------------------------
-  --------------------------------------------
-  Created constructor
-  --------------------------------------------
-  --------------------------------------------*/
+
   constructor(private httpClient: HttpClient) { }
-    
-  /**
-   * Write code on Method
-   *
-   * @return response()
-   */
-  getAll(): Observable<any> {
-  
-    return this.httpClient.get(this.apiURL + '/Flights/')
-  
-    .pipe(
-      catchError(this.errorHandler)
-    )
+
+  getFlights(): Observable<Flight[]> {
+    return this.httpClient.get<Flight[]>(this.apiURL, this.httpOptions);
   }
-    
-  /**
-   * Write code on Method
-   *
-   * @return response()
-   */
-  create(flight:Flight): Observable<any> {
+
+  getFlight(id:number): Observable<Flight> {
+    let url = `${this.apiURL}/${id}`;
+    return this.httpClient.get<Flight>(url, this.httpOptions);
+  }
+
+  createFlight(flight:Flight): Observable<Flight> {
   
-    return this.httpClient.post(this.apiURL + '/Flights/', JSON.stringify(flight), this.httpOptions)
-  
-    .pipe(
-      catchError(this.errorHandler)
-    )
+    return this.httpClient.post<Flight>(this.apiURL, JSON.stringify(flight), this.httpOptions)
   }  
-    
-  /**
-   * Write code on Method
-   *
-   * @return response()
-   */
-  find(id:number): Observable<any> {
-  
-    return this.httpClient.get(this.apiURL + '/Flights/' + id)
-  
-    .pipe(
-      catchError(this.errorHandler)
-    )
+
+  update(flight:Flight): Observable<Flight> {
+    let url = `${this.apiURL}/${flight.id}`
+    return this.httpClient.put<Flight>(url, JSON.stringify(flight), this.httpOptions)
   }
-    
-  /**
-   * Write code on Method
-   *
-   * @return response()
-   */
-  update(id:number, flight:Flight): Observable<any> {
-  
-    return this.httpClient.put(this.apiURL + '/Flights/' + id, JSON.stringify(flight), this.httpOptions)
- 
-    .pipe( 
-      catchError(this.errorHandler)
-    )
+
+  delete(id:number): Observable<Flight> {
+    let url = `${this.apiURL}/${id}`
+    return this.httpClient.delete<Flight>(url, this.httpOptions)
   }
-       
-  /**
-   * Write code on Method
-   *
-   * @return response()
-   */
-  delete(id:number){
-    return this.httpClient.delete(this.apiURL + '/Flights/' + id, this.httpOptions)
-  
-    .pipe(
-      catchError(this.errorHandler)
-    )
-  }
-      
-  /** 
-   * Write code on Method
-   *
-   * @return response()
-   */
-  errorHandler(error:any) {
-    let errorMessage = '';
-    if(error.error instanceof ErrorEvent) {
-      errorMessage = error.error.message;
-    } else {
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    return throwError(errorMessage);
- }
 }
