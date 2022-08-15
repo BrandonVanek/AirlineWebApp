@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css']
 })
-export class PassengerEditComponent implements OnInit {
+export class EditComponent implements OnInit {
 
   constructor() { }
 

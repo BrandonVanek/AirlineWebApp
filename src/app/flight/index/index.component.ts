@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.css']
 })
-export class FlightIndexComponent implements OnInit {
+export class IndexComponent implements OnInit {
 
   constructor() { }
 
