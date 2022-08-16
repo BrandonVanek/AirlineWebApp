@@ -1,1 +1,24 @@
-<p>index works!</p>
+
+<div class="table-responsive">
+    <h1>Bookings</h1> 
+    <a href="#" routerLink="/booking/create" class="btn btn-success">+ Create a Booking</a>
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Flight Id</th>
+                <th>Passenger Id</th>
+                <th>Confirmation Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let booking of bookings">
+                <td>{{ booking.id }}</td>
+                <td>{{ booking.flightId }}</td>
+                <td>{{ booking.passengerId }}</td>
+                <td>{{ booking.confirmationNumber }}</td>
+                <td><button (click)="removeFlight(booking.id)" class="btn btn-danger">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,4 +1,5 @@
 import { Booking } from "../booking/booking";
+import { Passenger } from "../passenger/passenger";
 
 export interface Flight {
     id: number;
@@ -9,7 +10,7 @@ export interface Flight {
     departureAirport : string;
     arrivalAirport : string;
     maxCapacity: number;
-    bookings: Booking[];
+    bookings: Passenger[];
 }
 
 export interface FlightDTO {
@@ -20,4 +21,5 @@ export interface FlightDTO {
     departureAirport : string;
     arrivalAirport : string;
     maxCapacity: number;
+    bookings: Booking[];
 }

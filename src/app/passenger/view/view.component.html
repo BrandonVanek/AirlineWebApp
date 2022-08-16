@@ -1,1 +1,37 @@
-<p>view works!</p>
+<div class="table-responsive">
+    <a href="#" routerLink="/passenger/index" class="btn btn-primary">&lt;&lt; Back</a>
+    <h1>{{passenger.name}}'s Information</h1>
+    <div style="-ms-flex-align: center;">
+        <p>Occupation: <strong>{{passenger.job}}</strong></p>
+        <p>Email: <strong>{{passenger.email}}</strong></p>
+        <p>Age: <strong>{{passenger.age}}</strong></p>
+    </div>
+    <h3>Flights</h3>
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Flight Number</th>
+                <th>Destination</th>
+                <th>Date and Time of Departure</th>
+                <th>Date and Time of Arrival</th>
+                <th>Departure Airport</th>
+                <th>Arrival Airport</th>
+                <th>Flight's Max Capacity</th>
+                <th>Confirmation Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let booking of passenger.bookings">
+                <td>{{booking.flightNumber}}</td>
+                <td>{{booking.destination}}</td>
+                <td>{{booking.departureDateTime}}</td>
+                <td>{{booking.arrivalDateTime}}</td>
+                <td>{{booking.departureAirport}}</td>
+                <td>{{booking.arrivalAirport}}</td>
+                <td>{{booking.maxCapacity}}</td>
+                <td *ngFor="let number of booking.bookings">
+                    {{number.confirmationNumber}}</td>
+            </tr>  
+        </tbody>
+    </table>
+</div>

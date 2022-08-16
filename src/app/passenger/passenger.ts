@@ -1,4 +1,6 @@
+
 import { Booking } from "../booking/booking";
+import { Flight, FlightDTO } from "../flight/flight";
 
 export interface Passenger {
     id: number;
@@ -6,5 +8,12 @@ export interface Passenger {
     job: string;
     email: string;
     age: number;
-    bookings: Booking[];
+    bookings: FlightDTO[];
+}
+
+export interface PassengerDTO {
+    name: string;
+    job: string;
+    email: string;
+    age: number;
 }

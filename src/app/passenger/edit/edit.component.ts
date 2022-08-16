@@ -60,7 +60,7 @@ export class EditComponent implements OnInit {
       job: this.passenger.job,
       email: this.passenger.email,
       age: this.passenger.age, 
-      bookings: this.passenger.bookings
+      // bookings: this.passenger.bookings
     });
   }
 
@@ -74,8 +74,8 @@ export class EditComponent implements OnInit {
   get f() { return this.form.controls; }
     
   submit(){
-    // console.log(this.form.value);
-    // console.log(this.form.valid);
+    console.log(this.form.value);
+    console.log(this.form.valid);
     this.passengerService.updatePassenger(this.form.value, this.id).subscribe(() => {
       console.log("Passenger updated successfully!");
       this.router.navigateByUrl('passenger/index');

@@ -69,7 +69,7 @@ export class EditComponent implements OnInit {
       departureAirport: this.flight.departureAirport,
       arrivalAirport: this.flight.arrivalAirport, 
       maxCapacity: this.flight.maxCapacity,
-      bookings: this.flight.bookings
+      // bookings: this.flight.bookings
     });
   }
 
@@ -85,8 +85,8 @@ export class EditComponent implements OnInit {
   submit(){
     this.form.value["departureDateTime"] = this.flight.departureDateTime;
     this.form.value["arrivalDateTime"] = this.flight.arrivalDateTime;
-    // console.log(this.form.value);
-    // console.log(this.form.valid);
+    console.log(this.form.value);
+    console.log(this.form.valid);
     this.flightService.updateFlight(this.form.value, this.id).subscribe(() => {
       console.log("Flight updated successfully!");
       this.router.navigateByUrl('flight/index');
