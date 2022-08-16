@@ -11,49 +11,44 @@ import { FormGroup, FormControl, Validators} from '@angular/forms';
 export class CreateComponent implements OnInit {
     
   form!: FormGroup;
-    
-  /*------------------------------------------
-  --------------------------------------------
-  Created constructor
-  --------------------------------------------
-  --------------------------------------------*/
+  departureDateTime: Date;
+  arrivalDateTime: Date;
+  localDepartureDateTime: string;
+  localArrivalDateTime: string;
+
   constructor(
     public flightService: FlightService,
     private router: Router
-  ) { }
+  ) { 
+    this.departureDateTime = new Date();
+    this.localDepartureDateTime = this.departureDateTime.toISOString();
+    this.localDepartureDateTime = this.localDepartureDateTime.substring(0, this.localDepartureDateTime.length - 1);
+    this.arrivalDateTime = new Date();
+    this.localArrivalDateTime = this.arrivalDateTime.toISOString();
+    this.localArrivalDateTime = this.localArrivalDateTime.substring(0, this.localArrivalDateTime.length - 1);
+  } 
     
-  /**
-   * Write code on Method
-   *
-   * @return response()
-   */
   ngOnInit(): void {
     this.form = new FormGroup({
-      title: new FormControl('', [Validators.required]),
-      body: new FormControl('', Validators.required)
+      flightNumber: new FormControl('', Validators.required),
+      destination: new FormControl('', Validators.required),
+      departureDateTime: new FormControl(this.localDepartureDateTime, Validators.required),
+      arrivalDateTime: new FormControl(this.localArrivalDateTime, Validators.required),
+      departureAirport: new FormControl('', Validators.required),
+      arrivalAirport: new FormControl('', Validators.required),
+      maxCapacity: new FormControl('', Validators.required),
     });
   }
+
+  get f() { return this.form.controls; }
     
-  /**
-   * Write code on Method
-   *
-   * @return response()
-   */
-  get f(){
-    return this.form.controls;
-  }
-    
-  /**
-   * Write code on Method
-   *
-   * @return response()
-   */
   submit(){
     console.log(this.form.value);
-    this.flightService.createFlight(this.form.value).subscribe((res:any) => {
-         console.log('Flight created successfully!');
-         this.router.navigateByUrl('flight/index');
-    })
+    console.log(this.form.valid);
+    this.flightService.createFlight(this.form.value).subscribe(() => {
+      console.log("Flight created successfully!");
+      this.router.navigateByUrl('flight/index');
+    });
   }
   
 }

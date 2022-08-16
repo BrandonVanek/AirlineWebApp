@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {  Observable } from 'rxjs';
   
 import { Flight } from './flight';
+import { ActivatedRoute } from '@angular/router';
   
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class FlightService {
     })
   }
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private route: ActivatedRoute) { }
 
   getFlights(): Observable<Flight[]> {
     return this.httpClient.get<Flight[]>(this.apiURL, this.httpOptions);
@@ -30,16 +31,16 @@ export class FlightService {
   }
 
   createFlight(flight:Flight): Observable<Flight> {
-  
-    return this.httpClient.post<Flight>(this.apiURL, JSON.stringify(flight), this.httpOptions)
+    return this.httpClient.post<Flight>(this.apiURL, flight, this.httpOptions)
   }  
 
-  update(flight:Flight): Observable<Flight> {
-    let url = `${this.apiURL}/${flight.id}`
-    return this.httpClient.put<Flight>(url, JSON.stringify(flight), this.httpOptions)
+  updateFlight(flight:Flight, id: number): Observable<Flight> {
+    let url = `${this.apiURL}/${id}`
+    flight.id = id;
+    return this.httpClient.put<Flight>(url, flight, this.httpOptions)
   }
 
-  delete(id:number): Observable<Flight> {
+  deleteFlight(id:number): Observable<Flight> {
     let url = `${this.apiURL}/${id}`
     return this.httpClient.delete<Flight>(url, this.httpOptions)
   }

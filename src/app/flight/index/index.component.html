@@ -28,7 +28,7 @@
                 <td>{{ flight.maxCapacity }}</td>
                 <td><a [routerLink]="['/flight', flight.id, 'view']" class="btn btn-primary">View</a>
                     <a [routerLink]="['/flight', flight.id, 'edit']" class="btn btn-primary">Edit</a>
-                    <a href="#" routerLink="/flight/index" class="btn btn-danger">Delete</a></td>
+                    <button (click)="removeFlight(flight.id)" class="btn btn-danger">Delete</button></td>
             </tr>
         </tbody>
     </table>

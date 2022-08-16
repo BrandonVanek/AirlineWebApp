@@ -20,5 +20,19 @@ export class IndexComponent implements OnInit {
   retrieveFlights() : void {
     this.flightService.getFlights().subscribe(flights => this.flights = flights)
   }
-
+  
+  removeFlight(id : number): void {
+    if(confirm("Are you sure to delete this flight?")) {
+      console.log(`ID of the flight to be removed: ${id}`)  
+      this.flightService.deleteFlight(id).subscribe({
+        next: () => {
+          this.flights = this.flights.filter(u => u.id != id)
+          console.log(`The flight with ID = ${id} have been removed.`)
+        },
+        error: () => {
+          console.log(`An error occurred when trying to remove the flight with ID = ${id}.`)
+        }
+      })
+    }
+  }
 }

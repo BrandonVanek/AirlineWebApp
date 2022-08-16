@@ -22,7 +22,7 @@
                 <td>{{ passenger.age }}</td>
                 <td><a [routerLink]="['/passenger', passenger.id, 'view']" class="btn btn-primary">View</a>
                     <a [routerLink]="['/passenger', passenger.id, 'edit']" class="btn btn-primary">Edit</a>
-                    <a href="#" routerLink="/passenger/index" class="btn btn-danger">Delete</a></td>
+                    <button (click)="removePassenger(passenger.id)" class="btn btn-danger">Delete</button></td>
             </tr>
         </tbody>
     </table>
