@@ -18,7 +18,7 @@ export class IndexComponent implements OnInit {
   }
 
   retrieveFlights() : void {
-    this.flightService.getFlights().subscribe(flights => this.flights = flights);
+    this.flightService.getFlights().subscribe(flights => this.flights = flights)
   }
 
 }

@@ -1,8 +1,8 @@
 
-<div class="container">
+<div class="table-responsive">
     <h1>Flights</h1> 
     <a href="#" routerLink="/flight/create" class="btn btn-success">+ Create A Flight</a>
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped table-hover">
         <thead>
             <tr>
                 <th>Id</th>
@@ -13,6 +13,7 @@
                 <th>Departure Airport</th>
                 <th>Arrival Airport</th>
                 <th>Max Capacity</th>
+                <th>Options</th>
             </tr>
         </thead>
         <tbody>
@@ -25,6 +26,9 @@
                 <td>{{ flight.departureAirport }}</td>
                 <td>{{ flight.arrivalAirport }}</td>
                 <td>{{ flight.maxCapacity }}</td>
+                <td><a [routerLink]="['/flight', flight.id, 'view']" class="btn btn-primary">View</a>
+                    <a [routerLink]="['/flight', flight.id, 'edit']" class="btn btn-primary">Edit</a>
+                    <a href="#" routerLink="/flight/index" class="btn btn-danger">Delete</a></td>
             </tr>
         </tbody>
     </table>

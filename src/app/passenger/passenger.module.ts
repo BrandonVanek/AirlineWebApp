@@ -1,7 +1,6 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-  
 import { PassengerRoutingModule } from './passenger-routing.module';
 import { IndexComponent } from './index/index.component';
 import { ViewComponent } from './view/view.component';

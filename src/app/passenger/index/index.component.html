@@ -1,8 +1,8 @@
 
-<div class="container">
+<div class="table-responsive">
     <h1>Passengers</h1> 
-    <a href="#" routerLink="/flight/create" class="btn btn-success">+ Create a Passenger</a>
-    <table class="table table-bordered table-striped">
+    <a href="#" routerLink="/passenger/create" class="btn btn-success">+ Create a Passenger</a>
+    <table class="table table-bordered table-striped table-hover">
         <thead>
             <tr>
                 <th>Id</th>
@@ -10,6 +10,7 @@
                 <th>Job</th>
                 <th>Email</th>
                 <th>Age</th>
+                <th>Options</th>
             </tr>
         </thead>
         <tbody>
@@ -19,6 +20,9 @@
                 <td>{{ passenger.job }}</td>
                 <td>{{ passenger.email }}</td>
                 <td>{{ passenger.age }}</td>
+                <td><a [routerLink]="['/passenger', passenger.id, 'view']" class="btn btn-primary">View</a>
+                    <a [routerLink]="['/passenger', passenger.id, 'edit']" class="btn btn-primary">Edit</a>
+                    <a href="#" routerLink="/passenger/index" class="btn btn-danger">Delete</a></td>
             </tr>
         </tbody>
     </table>
