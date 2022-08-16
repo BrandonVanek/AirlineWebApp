@@ -25,23 +25,23 @@ export class PassengerService {
     return this.httpClient.get<Passenger[]>(this.apiURL, this.httpOptions);
   }
 
-  getFlight(id:number): Observable<Passenger> {
+  getPassenger(id:number): Observable<Passenger> {
     let url = `${this.apiURL}/${id}`
     return this.httpClient.get<Passenger>(url, this.httpOptions);
   }
 
   createPassenger(passenger:Passenger): Observable<Passenger> {
-  
-    return this.httpClient.post<Passenger>(this.apiURL, JSON.stringify(passenger), this.httpOptions)
+    return this.httpClient.post<Passenger>(this.apiURL, passenger, this.httpOptions)
   }  
     
-  updatePassenger(id:number, passenger:Passenger): Observable<any> {
-    let url = `${this.apiURL}/${id}`
-    return this.httpClient.put(url, JSON.stringify(passenger), this.httpOptions)
+  updatePassenger(passenger:Passenger, id:number): Observable<any> {
+    let url = `${this.apiURL}/${id}`;
+    passenger.id = id;
+    return this.httpClient.put(url, passenger, this.httpOptions);
   }
        
   deletePassenger(id:number){
-    let url = `${this.apiURL}/${id}`
-    return this.httpClient.delete(url, this.httpOptions)
+    let url = `${this.apiURL}/${id}`; 
+    return this.httpClient.delete(url, this.httpOptions);
   }
 }

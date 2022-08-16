@@ -43,8 +43,10 @@ export class CreateComponent implements OnInit {
   get f() { return this.form.controls; }
     
   submit(){
-    console.log(this.form.value);
-    console.log(this.form.valid);
+    this.form.value["departureDateTime"] = this.localDepartureDateTime;
+    this.form.value["arrivalDateTime"] = this.localArrivalDateTime;
+    // console.log(this.form.value);
+    // console.log(this.form.valid);
     this.flightService.createFlight(this.form.value).subscribe(() => {
       console.log("Flight created successfully!");
       this.router.navigateByUrl('flight/index');

@@ -3,7 +3,6 @@ import { FlightService } from '../flight.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { Flight } from '../flight';
-import { BookingModule } from 'src/app/booking/booking.module';
      
 @Component({
   selector: 'app-edit',
@@ -15,6 +14,10 @@ export class EditComponent implements OnInit {
   form!: FormGroup;
   flight: Flight;
   id: number;
+  // departureDateTime: Date;
+  // arrivalDateTime: Date;
+  // localDepartureDateTime: string;
+  // localArrivalDateTime: string;
 
   constructor(
     public flightService: FlightService,
@@ -35,10 +38,16 @@ export class EditComponent implements OnInit {
       maxCapacity: 0,
       bookings: []
     }
+    // this.departureDateTime = new Date();
+    // this.localDepartureDateTime = this.departureDateTime.toISOString();
+    // this.localDepartureDateTime = this.localDepartureDateTime.substring(0, this.localDepartureDateTime.length - 1);
+    // this.arrivalDateTime = new Date();
+    // this.localArrivalDateTime = this.arrivalDateTime.toISOString();
+    // this.localArrivalDateTime = this.localArrivalDateTime.substring(0, this.localArrivalDateTime.length - 1);
   } 
     
   ngOnInit() : void {
-    this.loadFlight()
+    this.loadFlight();
     this.form = new FormGroup({
       flightNumber: new FormControl(this.flight.flightNumber, Validators.required),
       destination: new FormControl(this.flight.destination, Validators.required),
@@ -74,8 +83,10 @@ export class EditComponent implements OnInit {
   get f() { return this.form.controls; }
     
   submit(){
-    console.log(this.form.value["departureDateTime"]);
-    console.log(this.form.valid);
+    this.form.value["departureDateTime"] = this.flight.departureDateTime;
+    this.form.value["arrivalDateTime"] = this.flight.arrivalDateTime;
+    // console.log(this.form.value);
+    // console.log(this.form.valid);
     this.flightService.updateFlight(this.form.value, this.id).subscribe(() => {
       console.log("Flight updated successfully!");
       this.router.navigateByUrl('flight/index');
