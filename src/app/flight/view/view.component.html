@@ -2,8 +2,10 @@
     <a href="#" routerLink="/flight/index" class="btn btn-primary">&lt;&lt; Back</a>
     <h1>Flight {{flight.flightNumber}} Information</h1>
     <p>Destination: <strong>{{flight.destination}}</strong></p>
-    <p>Date and Time of Departure: <strong>{{flight.departureDateTime}}</strong></p>
-    <p>Date and Time of Arrival: <strong>{{flight.arrivalDateTime}}</strong></p>
+    <p>Date of Departure: <strong>{{ flight.departureDateTime.split("T")[0]}}</strong></p>
+    <p>Time of Departure: <strong>{{ flight.departureDateTime.split("T")[1].split(".")[0]}}</strong></p>
+    <p>Date of Arrival: <strong>{{ flight.arrivalDateTime.split("T")[0]}}</strong></p>
+    <p>Time of Arrival: <strong>{{ flight.arrivalDateTime.split("T")[1].split(".")[0]}}</strong></p>
     <p>Departure Airport: <strong>{{flight.departureAirport}}</strong></p>
     <p>Arrival Airport: <strong>{{flight.arrivalAirport}}</strong></p>
     <p>Flight's Max Capacity: <strong>{{flight.maxCapacity}}</strong></p>

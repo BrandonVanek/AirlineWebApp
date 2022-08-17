@@ -12,8 +12,10 @@
             <tr>
                 <th>Flight Number</th>
                 <th>Destination</th>
-                <th>Date and Time of Departure</th>
-                <th>Date and Time of Arrival</th>
+                <th>Departure Date</th>
+                <th>Departure Time</th>
+                <th>Arrival Date</th>
+                <th>Arrival Time</th>
                 <th>Departure Airport</th>
                 <th>Arrival Airport</th>
                 <th>Flight's Max Capacity</th>
@@ -24,8 +26,10 @@
             <tr *ngFor="let booking of passenger.bookings">
                 <td>{{booking.flightNumber}}</td>
                 <td>{{booking.destination}}</td>
-                <td>{{booking.departureDateTime}}</td>
-                <td>{{booking.arrivalDateTime}}</td>
+                <td>{{ booking.departureDateTime.split("T")[0]}}</td>
+                <td>{{ booking.departureDateTime.split("T")[1].split(".")[0]}}</td>
+                <td>{{ booking.departureDateTime.split("T")[0]}}</td>
+                <td>{{ booking.arrivalDateTime.split("T")[1].split(".")[0]}}</td>
                 <td>{{booking.departureAirport}}</td>
                 <td>{{booking.arrivalAirport}}</td>
                 <td>{{booking.maxCapacity}}</td>

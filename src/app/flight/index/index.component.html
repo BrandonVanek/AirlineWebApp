@@ -8,8 +8,10 @@
                 <th>Id</th>
                 <th>Flight Number</th>
                 <th>Destination</th>
-                <th>Departure Date and Time</th>
-                <th>Arrival Date and Time</th>
+                <th>Departure Date</th>
+                <th>Departure Time</th>
+                <th>Arrival Date</th>
+                <th>Arrival Time</th>
                 <th>Departure Airport</th>
                 <th>Arrival Airport</th>
                 <th>Max Capacity</th>
@@ -21,8 +23,10 @@
                 <td>{{ flight.id }}</td>
                 <td>{{ flight.flightNumber }}</td>
                 <td>{{ flight.destination }}</td>
-                <td>{{ flight.departureDateTime }}</td>
-                <td>{{ flight.arrivalDateTime }}</td>
+                <td>{{ flight.departureDateTime.split("T")[0]}}</td>
+                <td>{{ flight.departureDateTime.split("T")[1].split(".")[0]}}</td>
+                <td>{{ flight.departureDateTime.split("T")[0]}}</td>
+                <td>{{ flight.arrivalDateTime.split("T")[1].split(".")[0]}}</td>
                 <td>{{ flight.departureAirport }}</td>
                 <td>{{ flight.arrivalAirport }}</td>
                 <td>{{ flight.maxCapacity }}</td>
