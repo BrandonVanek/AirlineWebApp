@@ -15,6 +15,7 @@ export class CreateComponent implements OnInit {
   arrivalDateTime: Date;
   localDepartureDateTime: string;
   localArrivalDateTime: string;
+  isNumber!: boolean;
 
   constructor(
     public flightService: FlightService,
@@ -26,6 +27,7 @@ export class CreateComponent implements OnInit {
     this.arrivalDateTime = new Date();
     this.localArrivalDateTime = this.arrivalDateTime.toISOString();
     this.localArrivalDateTime = this.localArrivalDateTime.substring(0, this.localArrivalDateTime.length - 1);
+    this.isNumber = false;
   } 
     
   ngOnInit(): void {
@@ -40,6 +42,10 @@ export class CreateComponent implements OnInit {
     });
   }
 
+  ngOnChanges(): void {
+    this.isNumber = false;
+  }
+
   get f() { return this.form.controls; }
     
   submit(){
@@ -51,6 +57,7 @@ export class CreateComponent implements OnInit {
       console.log("Flight created successfully!");
       this.router.navigateByUrl('flight/index');
     });
+    this.isNumber = true;
   }
   
 }

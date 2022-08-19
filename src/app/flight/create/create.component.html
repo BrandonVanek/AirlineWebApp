@@ -62,5 +62,8 @@
         </div>
   
         <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Submit</button>
+        <div *ngIf="isNumber">
+            <h4>Please Enter a Valid Max Capacity!</h4>
+        </div>
     </form>
 </div>
